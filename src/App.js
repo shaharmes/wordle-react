@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import {Board} from './components/Board';
+import {Keyboard} from './components/Keyboard';
 import './App.css';
+import React, {useState, createContext} from 'react';
+import {boardDefault} from './components/Words';
+
+
+export const AppContext = createContext();
 
 function App() {
+
+  const [board, setBoard] = useState(boardDefault);
+  const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0})
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <nav>
+        <h1>Wordle</h1>
+      </nav>
+      <AppContext.Provider value = {{board, setBoard, currentAttempt, setCurrentAttempt}}>
+        <div className='game'>
+          <Board/>
+          <Keyboard/>
+        </div>
+      </AppContext.Provider>
     </div>
-  );
-}
+    )};
+
 
 export default App;
