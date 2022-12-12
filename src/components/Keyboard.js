@@ -8,20 +8,20 @@ export function Keyboard () {
 
     return (
     <div className="keyboard">
-        <div class="line1">
+        <div className="line1">
             {keys1.map( (key) => {
-                return <Key keyVal = {key} />
+                return <Key key= {key} keyVal = {key} />
             })}
         </div>
-        <div class="line2">
+        <div className="line2">
             {keys2.map( (key) => {
-                return <Key keyVal = {key} />
+                return <Key key= {key} keyVal = {key} />
             })}
         </div>
-        <div class="line3">
+        <div className="line3">
             <Key keyVal = {'ENTER'} bigKey />
             {keys3.map( (key) => {
-                return <Key keyVal = {key} />
+                return <Key key= {key} keyVal = {key} />
             })}
             <Key keyVal = {'DELETE'} bigKey />
         </div>

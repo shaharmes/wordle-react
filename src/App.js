@@ -5,6 +5,7 @@ import React, {useState, createContext} from 'react';
 import {boardDefault} from './components/Words';
 
 
+
 export const AppContext = createContext();
 
 function App() {
@@ -12,13 +13,29 @@ function App() {
   const [board, setBoard] = useState(boardDefault);
   const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0})
 
+
+  function boardHandler(keyVal) {
+    console.log('yes');
+    if (currentAttempt.letterPosition > 4){
+      currentAttempt.attempt = currentAttempt.attempt + 1;
+      currentAttempt.letterPosition = 0;
+      setCurrentAttempt({...currentAttempt});
+    }
+    const newBoard = [...board];
+    console.log(keyVal);
+    newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal;
+    setBoard(newBoard);
+    setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition + 1})
+    
+  }
+
   return (
     <div className="App">
       <nav>
         <h1>Wordle</h1>
       </nav>
-      <AppContext.Provider value = {{board, setBoard, currentAttempt, setCurrentAttempt}}>
-        <div className='game'>
+      <AppContext.Provider value = {{board, setBoard, currentAttempt, setCurrentAttempt, boardHandler}}>
+        <div className='game' onKeyDown={(e) => boardHandler(e.key.toUpperCase())} tabIndex="0">
           <Board/>
           <Keyboard/>
         </div>

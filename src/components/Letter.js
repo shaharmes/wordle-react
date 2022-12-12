@@ -1,4 +1,4 @@
-import React, {createContext, useContext} from 'react'
+import React, { useContext} from 'react'
 import { AppContext } from '../App';
 
 export function Letter({letterPositin, attemptVal}) {
