@@ -3,6 +3,8 @@ import { Letter } from "./Letter";
 
 export function Board () {
 
+    const l = [0, 1, 2, 3, 4]; // this list used twice
+
   return (
     <div className="board">
       <div className="row">

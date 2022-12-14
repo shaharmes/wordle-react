@@ -7,6 +7,6 @@ export function Letter({letterPositin, attemptVal}) {
     const letter = board[attemptVal][letterPositin];
 
   return (
-    <div className='letter'>{letter}</div>
+    <input type="text" style={{width: '1em'}} className='letter' value={letter}></input>
   )
 }
