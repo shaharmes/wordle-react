@@ -9,14 +9,14 @@ export function Board () {
 
   function createRow (row) {
     return (
-      <div className="row">
+      <div id="row">
         {lstLetters.map( num => (<Letter letterPositin={num} attemptVal={row} />))}
       </div>
     )
   }
 
   return (
-    <div className="board">
+    <div id="board">
       {lstRows.map( row => createRow(row))}
     </div>
   )

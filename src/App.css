@@ -32,7 +32,7 @@ nav h1 {
   color: white;
   font-size: 45px;
 }
-.game {
+#game {
   width: 100vw;
   height: calc(100vh - 170px);
   display: flex;
@@ -41,15 +41,15 @@ nav h1 {
   flex-direction: column;
 }
 
-.board {
+#board {
   width: 450px;
   height: 550px;
-  border: 1px solid black;
+  
   display: flex;
   flex-direction: column;
 }
 
-.row {
+#row {
   flex: 33%;
   display: flex;
   flex-direction: row;
@@ -132,7 +132,7 @@ nav h1 {
 }
 
 @media screen and (max-width: 600px) {
-  .board {
+  #board {
     width: 300px;
     height: 400px;
   }
@@ -150,8 +150,8 @@ nav h1 {
   }
 }
 
-/* media query for 12inch monitor */
-@media screen and (min-width: 1300px) and (max-height: 760px) {
+
+/* @media screen and (min-width: 1300px) and (max-height: 760px) {
   .board {
     width: 270px;
     height: 400px;
@@ -180,4 +180,4 @@ nav h1 {
   #big {
     width: 90px;
   }
-}
+}  */

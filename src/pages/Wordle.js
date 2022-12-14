@@ -33,7 +33,7 @@ export function Wordle() {
 
     return (
         <AppContext.Provider value = {{board, setBoard, currentAttempt, setCurrentAttempt, boardHandler}}>
-            <div className='game' onKeyDown ={e => boardHandler(e.key.toUpperCase())} tabIndex="0">
+            <div id='game' onKeyDown ={e => boardHandler(e.key.toUpperCase())} tabIndex="0">
                 <Board/>
                 <Keyboard/>
             </div>
