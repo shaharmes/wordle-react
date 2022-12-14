@@ -9,7 +9,7 @@ export function Wordle() {
 
     const [board, setBoard] = useState(boardDefault);
     const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0})
-  
+
   
     function boardHandler(keyVal) {
       if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1){
@@ -20,10 +20,15 @@ export function Wordle() {
         currentAttempt.letterPosition = 0;
         setCurrentAttempt({...currentAttempt});
       }
+
       const newBoard = [...board];
       newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal;
       setBoard(newBoard);
       setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition + 1})
+
+      if (currentAttempt.letterPosition === 4){
+        setTimeout(() => alert("done"), 1)
+      }
     }
 
     return (
