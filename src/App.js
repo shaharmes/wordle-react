@@ -23,12 +23,11 @@ function App() {
       setCurrentAttempt({...currentAttempt});
     }
     const newBoard = [...board];
-    console.log(keyVal);
     newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal;
     setBoard(newBoard);
     setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition + 1})
-    
   }
+
 
   return (
     <div className="App">
@@ -36,7 +35,7 @@ function App() {
         <h1>Wordle</h1>
       </nav>
       <AppContext.Provider value = {{board, setBoard, currentAttempt, setCurrentAttempt, boardHandler}}>
-        <div className='game' onKeyDown={(e) => boardHandler(e.key.toUpperCase())} tabIndex="0">
+        <div className='game' tabIndex="0">
           <Board/>
           <Keyboard/>
         </div>
