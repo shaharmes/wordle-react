@@ -22,15 +22,31 @@ nav {
   width: 100%;
   margin: 0;
   border-bottom: 1px solid grey;
-  display: grid;
-  place-items: center;
+}
+
+#navB{
+  display: flex;
+  justify-content: space-around;
+}
+
+nav h2{
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: white;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+nav #helpB{
+  align-self: center;
+  height: 40px;
 }
 
 nav h1 {
   margin: 0;
   font-family: Helvetica, Arial, sans-serif;
   color: white;
-  font-size: 45px;
+  
 }
 #game {
   width: 100vw;
@@ -129,6 +145,54 @@ nav h1 {
 }
 #disabled {
   background-color: #3a393c;
+}
+
+#rowMod {
+  flex: 33%;
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  width: 300px;
+}
+
+#modalLet {
+  color: black;
+  width: 50px;
+  height: 50px;
+}
+
+#greenLet {
+  background-color: #528d4e;
+  color: black;
+  width: 50px;
+  height: 50px;
+}
+
+#yellowLet {
+  background-color: #dbc245;
+  color: black;
+  width: 50px;
+  height: 50px;
+}
+
+#grayLet {
+  background-color: rgb(155, 154, 154);
+  color: black;
+  width: 50px;
+  height: 50px;
+}
+
+#modalH{
+  border-bottom: none;
+  margin-left: 10px;
+}
+
+#modalB{
+  margin-left: 10px;
+}
+
+#pMod {
+  margin-left: 10px;
 }
 
 @media screen and (max-width: 600px) {

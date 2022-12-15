@@ -6,6 +6,7 @@ import { Wordle } from "./pages/Wordle";
 import { SignIn } from "./pages/SignIn";
 
 
+
 export const router = createBrowserRouter([
   {
     
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
       {
         path: "wordle",
         element: <Wordle />
-      }
+      },
     ]
   },
 
