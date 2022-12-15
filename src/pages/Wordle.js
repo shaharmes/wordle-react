@@ -2,13 +2,28 @@ import { AppContext } from '../providers/AppContext';
 import {Board} from '../components/Board';
 import {Keyboard} from '../components/Keyboard';
 import '../App.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {boardDefault} from '../components/Words';
 
 export function Wordle() {
 
     const [board, setBoard] = useState(boardDefault);
     const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0})
+
+    const word = 'LEMON';
+    let attempt = 'MELON';
+
+    useEffect(() => {
+      document.getElementById('game').focus();
+    }, [])
+
+    
+    // useEffect(() => {
+    //     if (currentAttempt.attempt > 0){
+    //       attempt = board[currentAttempt.attempt - 1].join('');
+    //     }
+    // }, [currentAttempt.attempt])
+    
 
   
     function boardHandler(keyVal) {
@@ -32,7 +47,7 @@ export function Wordle() {
     }
 
     return (
-        <AppContext.Provider value = {{board, setBoard, currentAttempt, setCurrentAttempt, boardHandler}}>
+        <AppContext.Provider value = {{board, setBoard, currentAttempt, setCurrentAttempt, boardHandler, word, attempt}}>
             <div id='game' onKeyDown ={e => boardHandler(e.key.toUpperCase())} tabIndex="0">
                 <Board/>
                 <Keyboard/>
