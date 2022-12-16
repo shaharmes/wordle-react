@@ -24,9 +24,10 @@ export function Letter({letterPositin, attemptVal}) {
       }
     }  
 
-    
-
   return (
-    <div className='letter' id={letterState}>{letter}</div>
+    <div className='letter' id={letterState} 
+    style={letter ? {border:"1.5px", borderStyle:"solid", borderColor:"white"} : {}}>
+      {letter}
+    </div>
   )
 }

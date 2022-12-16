@@ -8,7 +8,7 @@
 }
 
 /* remove focus visibility from divs */
-div:focus {
+.game:focus {
   outline: none;
 }
 

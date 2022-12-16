@@ -1,10 +1,19 @@
+import { useContext } from "react";
+import { AppContext } from "../providers/AppContext";
 import { Key } from "./Key";
 
 export function Keyboard () {
 
+    const {boardHandler} = useContext(AppContext);
+
     const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
     const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
+
+    function clickHandle () {
+        boardHandler('');
+    }
+
 
     return (
     <div className="keyboard">
@@ -19,11 +28,15 @@ export function Keyboard () {
             })}
         </div>
         <div className="line3">
-            <Key keyVal = {'ENTER'} bigKey />
+            <div className='key' id={'big'} onClick={clickHandle}>
+                {'ENTER'}
+            </div>
             {keys3.map( (key) => {
                 return <Key key= {key} keyVal = {key} />
             })}
-            <Key keyVal = {'DELETE'} bigKey />
+            <div className='key' id={'big'} onClick={clickHandle}>
+                {'DELETE'}
+            </div>
         </div>
     </div>
     );

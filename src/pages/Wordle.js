@@ -8,21 +8,40 @@ import {boardDefault} from '../components/Words';
 export function Wordle() {
 
     const [board, setBoard] = useState(boardDefault);
-    const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0})
+    const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0});
 
     const word = 'LEMON';
-    let attempt = 'MELON';
+
+    const [correctLetters, setCorrectLetters] = useState([]);
+    const [almostLetters, setAlmostLetters] = useState([]);
+    const [errorLetters, setErrorLetters] = useState([]);
 
     useEffect(() => {
       document.getElementById('game').focus();
     }, [])
 
     
-    // useEffect(() => {
-    //     if (currentAttempt.attempt > 0){
-    //       attempt = board[currentAttempt.attempt - 1].join('');
-    //     }
-    // }, [currentAttempt.attempt])
+    useEffect(() => {
+        if (currentAttempt.attempt > 0){
+          const newAttempt = board[currentAttempt.attempt - 1].join('');
+            newAttempt.split('').forEach((letter, index) => {
+                if (word[index] === newAttempt[index]){
+                    correctLetters.push(letter);
+                } 
+                if (word.includes(letter) && word[index] !== newAttempt[index]){
+                    almostLetters.push(letter);
+                }
+                if (!word.includes(letter)){
+                    errorLetters.push(letter);
+                }
+                
+                setAlmostLetters([...almostLetters]);
+                setCorrectLetters([...correctLetters]);
+                setErrorLetters([...errorLetters]);
+            })
+            }
+        
+    }, [currentAttempt.attempt])
     
 
   
@@ -47,7 +66,16 @@ export function Wordle() {
     }
 
     return (
-        <AppContext.Provider value = {{board, setBoard, currentAttempt, setCurrentAttempt, boardHandler, word, attempt}}>
+        <AppContext.Provider value = {{
+          board, 
+          setBoard, 
+          currentAttempt, 
+          setCurrentAttempt, 
+          boardHandler, 
+          word,
+          correctLetters,
+          almostLetters,
+          errorLetters}}>
             <div id='game' onKeyDown ={e => boardHandler(e.key.toUpperCase())} tabIndex="0">
                 <Board/>
                 <Keyboard/>

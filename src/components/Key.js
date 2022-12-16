@@ -3,22 +3,27 @@ import { AppContext } from '../providers/AppContext';
 
 
 
-export function Key({keyVal , bigKey}) {
+export function Key({keyVal}) {
 
-    const {boardHandler} = useContext(AppContext);
+    const {boardHandler, correctLetters, almostLetters, errorLetters} = useContext(AppContext);
 
-    let keyState = '';
 
     function clickHandle () {
 
       boardHandler(keyVal);
     }
 
+    let keyState = '';
 
-    if(bigKey){
-      keyState = 'big';
+    if (correctLetters.includes(keyVal)){
+      keyState = 'correct';
+    } else if (almostLetters.includes(keyVal)){
+      keyState = 'almost';
+    } else if (errorLetters.includes(keyVal)){
+      keyState = 'error';
     }
-   
+
+
 
   return (
     <div className='key' id={keyState} onClick={clickHandle}>
