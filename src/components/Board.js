@@ -1,5 +1,5 @@
 import { Letter } from "./Letter";
-
+import React from 'react';
 
 export function Board () {
 
@@ -16,7 +16,7 @@ export function Board () {
   }
 
   return (
-    <div id="board">
+    <div id="board" key={'board'}>
       {lstRows.map( row => createRow(row))}
     </div>
   )

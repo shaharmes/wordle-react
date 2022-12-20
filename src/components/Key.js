@@ -26,7 +26,7 @@ export function Key({keyVal}) {
 
 
   return (
-    <div className='key' id={keyState} onClick={clickHandle}>
+    <div className='key' id={keyState} key={keyVal} onClick={clickHandle}>
         {keyVal}
     </div>
   )

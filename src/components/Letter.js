@@ -25,7 +25,7 @@ export function Letter({letterPositin, attemptVal}) {
     }  
 
   return (
-    <div className='letter' id={letterState} 
+    <div className='letter' id={letterState} key={Math.random()} 
     style={letter ? {border:"1.5px", borderStyle:"solid", borderColor:"white"} : {}}>
       {letter}
     </div>

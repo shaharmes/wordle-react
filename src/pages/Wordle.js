@@ -61,7 +61,7 @@ export function Wordle() {
       setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition + 1})
 
       if (currentAttempt.letterPosition === 4){
-        setTimeout(() => alert("done"), 1)
+        console.log("done");
       }
     }
 

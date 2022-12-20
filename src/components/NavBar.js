@@ -9,10 +9,10 @@ export function NavBar() {
     const {handleShow} = useContext(NavContext);
 
   return (
-    <nav class="navbar navbar-dark bg-dark" id='navB'>
-        <Link class="navbar-brand" to={'/'}>Home</Link>
+    <nav className="navbar navbar-dark bg-dark" id='navB'>
+        <Link className="navbar-brand" to={'/'}>Home</Link>
         <h1>Wordle</h1>
-        <Link class="navbar-brand" variant="primary" onClick={handleShow}>Info</Link>
+        <Link className="navbar-brand" variant="primary" onClick={handleShow}>Info</Link>
         <ModalHelp />
     </nav>
   )
