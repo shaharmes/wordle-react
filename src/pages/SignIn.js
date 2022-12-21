@@ -1,6 +1,6 @@
 import React, { useRef} from "react";
 import { useNavigate } from 'react-router-dom';
-import '../sign.css';
+import '../sign.scss';
 
 export function SignIn() {
 

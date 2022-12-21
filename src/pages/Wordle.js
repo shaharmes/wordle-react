@@ -1,7 +1,7 @@
 import { AppContext } from '../providers/AppContext';
 import {Board} from '../components/Board';
 import {Keyboard} from '../components/Keyboard';
-import '../App.css';
+import '../App.scss';
 import React, {useEffect, useState} from 'react';
 import {boardDefault} from '../components/Words';
 

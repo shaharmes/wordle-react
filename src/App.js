@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { NavContext } from './providers/NavContext';
