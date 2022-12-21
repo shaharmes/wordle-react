@@ -49,20 +49,19 @@ export function Wordle() {
       if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1){
         return;
       }
-      if (currentAttempt.letterPosition > 4){
-        currentAttempt.attempt = currentAttempt.attempt + 1;
-        currentAttempt.letterPosition = 0;
-        setCurrentAttempt({...currentAttempt});
-      }
-
       const newBoard = [...board];
       newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal;
       setBoard(newBoard);
       setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition + 1})
 
       if (currentAttempt.letterPosition === 4){
+        currentAttempt.attempt = currentAttempt.attempt + 1;
+        currentAttempt.letterPosition = 0;
+        setCurrentAttempt({...currentAttempt});
         console.log("done");
       }
+
+      
     }
 
     return (

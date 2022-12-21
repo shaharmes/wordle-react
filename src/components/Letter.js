@@ -22,11 +22,15 @@ export function Letter({letterPositin, attemptVal}) {
       if (!correct && !almost){
         letterState = 'error';
       }
-    }  
+    }
+    
+    function isCurrentAttempt() {
+      return (currentAttempt.attempt === attemptVal && currentAttempt.letterPosition === letterPositin);
+    }
 
   return (
     <div className='letter' id={letterState} key={Math.random()} 
-    style={letter ? {border:"1.5px", borderStyle:"solid", borderColor:"white"} : {}}>
+    style={ isCurrentAttempt() ? {border:"1.5px solid red"} : (letter ? {border:"1.5px solid white"} : {})}>
       {letter}
     </div>
   )
