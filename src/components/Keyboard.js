@@ -10,8 +10,11 @@ export function Keyboard () {
     const keys2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"];
     const keys3 = ["Z", "X", "C", "V", "B", "N", "M"];
 
-    function clickHandle () {
-        boardHandler('');
+    const keyDelete = "DELETE";
+    const keyEnter = "ENTER";
+
+    function clickHandle (keyValue) {
+        boardHandler(keyValue);
     }
 
 
@@ -28,14 +31,14 @@ export function Keyboard () {
             })}
         </div>
         <div className="line3">
-            <div className='key' id={'big'} onClick={clickHandle}>
-                {'ENTER'}
+            <div className='key' id={'big'} onClick={(e) => clickHandle(keyEnter)}>
+                {keyEnter}
             </div>
             {keys3.map( (key) => {
                 return <Key key= {key} keyVal = {key} />
             })}
-            <div className='key' id={'big'} onClick={clickHandle}>
-                {'DELETE'}
+            <div className='key' id={'big'} onClick={(e) => clickHandle(keyDelete)}>
+                {keyDelete}
             </div>
         </div>
     </div>

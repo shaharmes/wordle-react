@@ -46,9 +46,22 @@ export function Wordle() {
 
   
     function boardHandler(keyVal) {
+      if (keyVal === 'DELETE' || keyVal === 'BACKSPACE'){
+        if (currentAttempt.letterPosition === 0){
+          return;
+        } else {
+          const newBoardDelete = [...board];
+          newBoardDelete[currentAttempt.attempt][currentAttempt.letterPosition - 1] = '';
+          setBoard(newBoardDelete);
+          setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition - 1})
+          return;
+        }
+      }
+
       if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1){
         return;
       }
+     
       const newBoard = [...board];
       newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal;
       setBoard(newBoard);
