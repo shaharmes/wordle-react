@@ -2,18 +2,23 @@ import { AppContext } from '../providers/AppContext';
 import {Board} from '../components/Board';
 import {Keyboard} from '../components/Keyboard';
 import '../css/App.scss'
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {boardDefault} from '../components/boardDefault';
 import {generateWords} from '../wordBank/Words';
+import { ModalGame } from '../components/ModalGame';
 
 export function Wordle() {
 
-    const [board, setBoard] = useState(boardDefault);
+    const [board, setBoard] = useState(boardDefault());
     const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0});
     const [correctLetters, setCorrectLetters] = useState([]);
     const [almostLetters, setAlmostLetters] = useState([]);
     const [errorLetters, setErrorLetters] = useState([]);
     const [wordSet, setWordSet] = useState(new Set());
+    const [show, setShow] = useState(false);
+    let gameResult = useRef(null);
+  
+    const handleShow = () => setShow(true);
 
     const word = 'LEMON';
 
@@ -51,35 +56,60 @@ export function Wordle() {
         
     }, [currentAttempt.attempt])
 
+    function gameReset() {
+      setBoard(boardDefault());
+      setCurrentAttempt({attempt: 0, letterPosition: 0});
+      setCorrectLetters([]);
+      setAlmostLetters([]);
+      setErrorLetters([]);
+      return;
+    }
+
+    function caseEnter () {
+      if (currentAttempt.letterPosition !== 5) return;
+
+        let currWord = board[currentAttempt.attempt].join('');
+
+        if (currWord === word) {
+          setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1})
+          gameResult.current = 'Win';
+          return handleShow();
+        }
+
+        if (currentAttempt.attempt === 5 && currWord !== word) {
+          setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1})
+          gameResult.current = 'Lose';
+          return handleShow();
+        }
+
+        if (wordSet.has(currWord.toLowerCase())){
+          return setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 0})
+        }
+
+        return alert("Word not found");
+    }
+
+    function caseDelete () {
+      if (currentAttempt.letterPosition === 0) return;
+
+      const newBoardDelete = [...board];
+      newBoardDelete[currentAttempt.attempt][currentAttempt.letterPosition - 1] = '';
+      setBoard(newBoardDelete);
+      setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition - 1})
+      return;
+      
+    }
+
   
     function boardHandler(keyVal) {
-      if (keyVal === 'DELETE' || keyVal === 'BACKSPACE'){ //case delete
-        if (currentAttempt.letterPosition === 0){
-          return;
-        } else {
-          const newBoardDelete = [...board];
-          newBoardDelete[currentAttempt.attempt][currentAttempt.letterPosition - 1] = '';
-          setBoard(newBoardDelete);
-          setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition - 1})
-          return;
-        }
-      }
+      if (keyVal === 'DELETE' || keyVal === 'BACKSPACE') return caseDelete();
 
-      if (keyVal === 'ENTER'){ //case enter
-        if (currentAttempt.letterPosition === 5){
-          setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 0})
-        }
-        return;
-      }
+      if (keyVal === 'ENTER') return caseEnter();
 
+      if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1 ) return;
 
-      if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1 ){ //case not letter
-        return;
-      }
+      if (currentAttempt.letterPosition === 5) return;
 
-      if (currentAttempt.letterPosition === 5){ //case full
-        return;
-      }
      
       const newBoard = [...board]; //case letter
       newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal;
@@ -87,10 +117,7 @@ export function Wordle() {
       setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition + 1})
 
       
-      if (currentAttempt.letterPosition === 4){ 
-        console.log("done");
-      }
-      
+      if (currentAttempt.letterPosition === 4) return console.log('done');
     }
 
     return (
@@ -103,10 +130,15 @@ export function Wordle() {
           word,
           correctLetters,
           almostLetters,
-          errorLetters}}>
+          errorLetters,
+          show,
+          setShow,
+          gameReset,
+          gameResult}}>
             <div id='game' onKeyDown ={e => boardHandler(e.key.toUpperCase())} tabIndex="0">
                 <Board/>
                 <Keyboard/>
+                <ModalGame/>
             </div>
         </AppContext.Provider>
     )

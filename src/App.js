@@ -13,12 +13,13 @@ function App() {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
 
+
   return (
     <div className="App">
       <NavContext.Provider value={{show, setShow, handleShow}}>
         <NavBar/>
+        <Outlet />
       </NavContext.Provider>
-      <Outlet />
     </div>
     )};
 

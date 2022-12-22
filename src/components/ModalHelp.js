@@ -15,6 +15,7 @@ export function ModalHelp() {
         backdrop="static"
         keyboard={false}
         centered={true}
+        restoreFocus={true}
       >
         <Modal.Header id="modalH" closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
