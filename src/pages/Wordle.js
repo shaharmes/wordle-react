@@ -10,7 +10,7 @@ export function Wordle() {
     const [board, setBoard] = useState(boardDefault);
     const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0});
 
-    const word = 'LEMON';
+    const word = 'GOOGLE';
 
     const [correctLetters, setCorrectLetters] = useState([]);
     const [almostLetters, setAlmostLetters] = useState([]);
@@ -42,7 +42,6 @@ export function Wordle() {
             }
         
     }, [currentAttempt.attempt])
-    
 
   
     function boardHandler(keyVal) {
@@ -58,22 +57,36 @@ export function Wordle() {
         }
       }
 
-      if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1){
+      if (keyVal === 'ENTER'){
+        if (currentAttempt.letterPosition === 5){
+          setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 0})
+        }
         return;
       }
+
+
+      if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1 ){
+        return;
+      }
+
+      if (currentAttempt.letterPosition === 5){
+        return;
+      }
+
+      if (keyVal === 'ENTER'){
+        setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 0})
+      }
+     
      
       const newBoard = [...board];
       newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal;
       setBoard(newBoard);
       setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition + 1})
 
+      
       if (currentAttempt.letterPosition === 4){
-        currentAttempt.attempt = currentAttempt.attempt + 1;
-        currentAttempt.letterPosition = 0;
-        setCurrentAttempt({...currentAttempt});
         console.log("done");
       }
-
       
     }
 
