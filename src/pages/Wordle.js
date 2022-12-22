@@ -4,8 +4,8 @@ import {Keyboard} from '../components/Keyboard';
 import '../css/App.scss'
 import React, {useEffect, useRef, useState} from 'react';
 import {boardDefault} from '../components/boardDefault';
-import {generateWords} from '../wordBank/Words';
-import { ModalGame } from '../components/ModalGame';
+import {wordBank} from '../wordBank/wordBank';
+import {ModalGame} from '../components/ModalGame';
 
 export function Wordle() {
 
@@ -14,7 +14,7 @@ export function Wordle() {
     const [correctLetters, setCorrectLetters] = useState([]);
     const [almostLetters, setAlmostLetters] = useState([]);
     const [errorLetters, setErrorLetters] = useState([]);
-    const [wordSet, setWordSet] = useState(new Set());
+    const wordSet = useRef(new Set(wordBank));
     const [show, setShow] = useState(false);
     let gameResult = useRef(null);
   
@@ -26,14 +26,6 @@ export function Wordle() {
       document.getElementById('game').focus();
     }, [])
 
-    useEffect(() => {
-      generateWords().then((words) => {
-        setWordSet(words);
-      })
-    }, [])
-        
-
-    
     useEffect(() => {
         if (currentAttempt.attempt > 0){
           const newAttempt = board[currentAttempt.attempt - 1].join('');
@@ -82,7 +74,7 @@ export function Wordle() {
           return handleShow();
         }
 
-        if (wordSet.has(currWord.toLowerCase())){
+        if (wordSet.current.has(currWord.toLowerCase())){
           return setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 0})
         }
 
