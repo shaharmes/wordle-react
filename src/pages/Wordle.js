@@ -1,24 +1,32 @@
 import { AppContext } from '../providers/AppContext';
 import {Board} from '../components/Board';
 import {Keyboard} from '../components/Keyboard';
-import '../App.scss';
+import '../css/App.scss'
 import React, {useEffect, useState} from 'react';
-import {boardDefault} from '../components/Words';
+import {boardDefault} from '../components/boardDefault';
+import {generateWords} from '../wordBank/Words';
 
 export function Wordle() {
 
     const [board, setBoard] = useState(boardDefault);
     const [currentAttempt, setCurrentAttempt] = useState({attempt: 0, letterPosition: 0});
-
-    const word = 'GOOGLE';
-
     const [correctLetters, setCorrectLetters] = useState([]);
     const [almostLetters, setAlmostLetters] = useState([]);
     const [errorLetters, setErrorLetters] = useState([]);
+    const [wordSet, setWordSet] = useState(new Set());
+
+    const word = 'LEMON';
 
     useEffect(() => {
       document.getElementById('game').focus();
     }, [])
+
+    useEffect(() => {
+      generateWords().then((words) => {
+        setWordSet(words);
+      })
+    }, [])
+        
 
     
     useEffect(() => {
@@ -45,7 +53,7 @@ export function Wordle() {
 
   
     function boardHandler(keyVal) {
-      if (keyVal === 'DELETE' || keyVal === 'BACKSPACE'){
+      if (keyVal === 'DELETE' || keyVal === 'BACKSPACE'){ //case delete
         if (currentAttempt.letterPosition === 0){
           return;
         } else {
@@ -57,7 +65,7 @@ export function Wordle() {
         }
       }
 
-      if (keyVal === 'ENTER'){
+      if (keyVal === 'ENTER'){ //case enter
         if (currentAttempt.letterPosition === 5){
           setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 0})
         }
@@ -65,26 +73,21 @@ export function Wordle() {
       }
 
 
-      if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1 ){
+      if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".indexOf(keyVal) === -1 ){ //case not letter
         return;
       }
 
-      if (currentAttempt.letterPosition === 5){
+      if (currentAttempt.letterPosition === 5){ //case full
         return;
       }
-
-      if (keyVal === 'ENTER'){
-        setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 0})
-      }
      
-     
-      const newBoard = [...board];
+      const newBoard = [...board]; //case letter
       newBoard[currentAttempt.attempt][currentAttempt.letterPosition] = keyVal;
       setBoard(newBoard);
       setCurrentAttempt({...currentAttempt, letterPosition: currentAttempt.letterPosition + 1})
 
       
-      if (currentAttempt.letterPosition === 4){
+      if (currentAttempt.letterPosition === 4){ 
         console.log("done");
       }
       
