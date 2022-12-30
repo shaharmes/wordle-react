@@ -1,4 +1,4 @@
-export function boardDefault () {
+export function boardDefault () : string[][] {
     return [
         ["","","","",""],
         ["","","","",""],

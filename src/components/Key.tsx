@@ -3,12 +3,12 @@ import { AppContext } from '../providers/AppContext';
 
 
 
-export function Key({keyVal}) {
+export function Key({keyVal}:any) : JSX.Element {
 
     const {boardHandler, correctLetters, almostLetters, errorLetters} = useContext(AppContext);
 
 
-    function clickHandle () {
+    function clickHandle () : void {
 
       boardHandler(keyVal);
     }

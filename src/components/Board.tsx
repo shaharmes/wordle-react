@@ -3,11 +3,11 @@ import React from 'react';
 
 export function Board () {
 
-  const lstLetters = [0, 1, 2, 3, 4];
+  const lstLetters : number[] = [0, 1, 2, 3, 4];
 
-  const lstRows = [0, 1, 2, 3, 4, 5]
+  const lstRows : number[] = [0, 1, 2, 3, 4, 5];
 
-  function createRow (row) {
+  function createRow (row : number) {
     return (
       <div id="row">
         {lstLetters.map( num => (<Letter letterPositin={num} attemptVal={row} />))}

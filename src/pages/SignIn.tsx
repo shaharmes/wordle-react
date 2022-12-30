@@ -8,7 +8,7 @@ export function SignIn() {
     const userPassword = useRef(null);
     let navigate = useNavigate();
   
-    const updateUserDeatils = (event) => {
+    const updateUserDeatils = () => {
    
           navigate('/wordle');
       }

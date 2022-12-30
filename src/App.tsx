@@ -5,9 +5,6 @@ import { NavContext } from './providers/NavContext';
 import { NavBar } from './components/NavBar';
 
 
-
-
-
 function App() {
 
   const [show, setShow] = useState(false);
