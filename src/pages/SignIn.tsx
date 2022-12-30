@@ -15,7 +15,7 @@ export function SignIn() {
 
     return (
     <>
-        <div className="wrapper fadeInDown mt-5">
+        <div className="wrapper fadeInDown">
             <div id="formContent">
                 <form id="formSign" onKeyUp={updateUserDeatils}>
                     <input ref= {userName} className = "mt-3 fadeIn second" type="text" id="login" name="login" placeholder="Name"/>

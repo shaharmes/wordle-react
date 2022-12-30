@@ -1,20 +1,32 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ModalHelp } from './ModalHelp'
 import { NavContext } from '../providers/NavContext'
 import { useContext } from 'react'
 import { Button } from 'react-bootstrap'
+import { ModalLogin } from './ModalLogin'
 
 
 export function NavBar() : JSX.Element {
 
-  const {handleShow} = useContext(NavContext);
+  const {handleShow, handleShowLogin} = useContext(NavContext);
+
+  let navigate = useNavigate();
+  
+  const sendHome = () => {
+ 
+        navigate('/');
+    }
 
   return (
     <nav className="navbar navbar-dark bg-dark" id='navB'>
-        <Link className="navbar-brand" to={'/'}>Home</Link>
+        <div id="navLeft">
+          <Button className="navbar-brand" id="navRight" variant="primay" onClick={sendHome}>Home</Button>
+          <Button className="navbar-brand" id="navRight" variant="primay" onClick={handleShowLogin}>Login</Button>
+          <ModalLogin />
+        </div>
         <h1>Wordle</h1>
-        <Button className="navbar-brand" variant="primay" onClick={handleShow}>Info</Button>
+        <Button className="navbar-brand" id="navRight" variant="primay" onClick={handleShow}>Info</Button>
         <ModalHelp />
     </nav>
   )

@@ -7,13 +7,16 @@ import { NavBar } from './components/NavBar';
 
 function App() {
 
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
   const handleShow = () => setShow(true);
+
+  const [showLogin, setShowLogin] = useState<boolean>(false);
+  const handleShowLogin = () => setShowLogin(true);
 
 
   return (
     <div className="App">
-      <NavContext.Provider value={{show, setShow, handleShow}}>
+      <NavContext.Provider value={{show, setShow, handleShow, showLogin, setShowLogin, handleShowLogin}}>
         <NavBar/>
         <Outlet />
       </NavContext.Provider>
