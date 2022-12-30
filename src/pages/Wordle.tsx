@@ -85,7 +85,17 @@ export function Wordle() {
       let currWord = board[currentAttempt.attempt].join('');
 
       if (currWord === word) {
+        setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 5})
         gameResult.current  = 'Win';
+        return handleShow();
+      }
+    }
+
+    function checkLose() {
+      let currWord = board[currentAttempt.attempt].join('');
+
+      if (currentAttempt.attempt === 5 && currWord !== word) {
+        gameResult.current = 'Lose';
         return handleShow();
       }
     }
@@ -122,6 +132,7 @@ export function Wordle() {
         console.log('done');
         setCurrentAttempt({...currentAttempt, attempt: currentAttempt.attempt + 1, letterPosition: 0})
         checkWin();
+        checkLose();
         return;
       }
     }
