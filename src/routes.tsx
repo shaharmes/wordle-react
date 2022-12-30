@@ -3,7 +3,6 @@ import App from "./App";
 import React from "react";
 import { Welcome } from "./pages/Welcome";
 import { Wordle } from "./pages/Wordle";
-import { SignIn } from "./pages/SignIn";
 
 
 
@@ -15,10 +14,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <Welcome/>
-      },
-      {
-        path: "sign-in",
-        element: <SignIn />
       },
       {
         path: "wordle",

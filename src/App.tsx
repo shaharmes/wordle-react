@@ -12,11 +12,14 @@ function App() {
 
   const [showLogin, setShowLogin] = useState<boolean>(false);
   const handleShowLogin = () => setShowLogin(true);
+  const handleCloseLogin = () => setShowLogin(false);
+
+  const [user, setUser] = useState<string | null>('');
 
 
   return (
     <div className="App">
-      <NavContext.Provider value={{show, setShow, handleShow, showLogin, setShowLogin, handleShowLogin}}>
+      <NavContext.Provider value={{show, setShow, handleShow, showLogin, setShowLogin, handleShowLogin, user, setUser, handleCloseLogin}}>
         <NavBar/>
         <Outlet />
       </NavContext.Provider>

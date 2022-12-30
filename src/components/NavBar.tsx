@@ -9,7 +9,7 @@ import { ModalLogin } from './ModalLogin'
 
 export function NavBar() : JSX.Element {
 
-  const {handleShow, handleShowLogin} = useContext(NavContext);
+  const {handleShow, handleShowLogin, user, setUser} = useContext(NavContext);
 
   let navigate = useNavigate();
   
@@ -18,11 +18,18 @@ export function NavBar() : JSX.Element {
         navigate('/');
     }
 
+  const handleLogout = () => {
+    setUser('');
+    sendHome();
+  }
+
   return (
     <nav className="navbar navbar-dark bg-dark" id='navB'>
         <div id="navLeft">
           <Button className="navbar-brand" id="navRight" variant="primay" onClick={sendHome}>Home</Button>
-          <Button className="navbar-brand" id="navRight" variant="primay" onClick={handleShowLogin}>Login</Button>
+          { user ? <Button className="navbar-brand user" id="navRight" variant="primay">Hi,&nbsp;&nbsp;&nbsp;{user}!&nbsp;:)</Button> : 
+          <Button className="navbar-brand" id="navRight" variant="primay" onClick={handleShowLogin}>Login</Button>}
+          {user ? <Button className="navbar-brand" id="navRight" variant="primay" onClick={handleLogout}>Logout</Button> : null}
           <ModalLogin />
         </div>
         <h1>Wordle</h1>

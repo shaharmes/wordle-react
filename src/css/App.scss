@@ -66,6 +66,22 @@ body {
       margin-right: 100px;
     }
 
+    Button {
+      &:active {
+        border: none;
+      }
+      &:hover {
+        font-weight: bold;
+      }
+    }
+
+    .user {
+      &:hover {
+        font-weight: normal;
+      }
+    }
+
+
   }
 
   #game {

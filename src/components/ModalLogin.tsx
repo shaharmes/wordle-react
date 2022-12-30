@@ -1,19 +1,17 @@
 import React, { useContext } from 'react';
 import { ModalHeader } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import { SignIn } from '../pages/SignIn';
 import { NavContext } from '../providers/NavContext';
+import { SignIn } from './SignIn';
 
 export function ModalLogin() {
-  const {showLogin, setShowLogin} = useContext(NavContext);
-  const handleClose = () => setShowLogin(false);
+  const {showLogin, handleCloseLogin} = useContext(NavContext);
   
-
   return (
     <>
       <Modal
         show={showLogin}
-        onHide={handleClose}
+        onHide={handleCloseLogin}
         backdrop="static"
         keyboard={false}
         centered={true}
